@@ -1,6 +1,7 @@
 package ru.naumen.collection.task1;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Пользователь
@@ -18,11 +19,13 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Arrays.equals(passwordHash, user.passwordHash);
+        return Objects.equals(username, user.username) && Objects.equals(email, user.email) && Arrays.equals(passwordHash, user.passwordHash);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(passwordHash);
+        int result = Objects.hash(username, email);
+        result = 31 * result + Arrays.hashCode(passwordHash);
+        return result;
     }
 }
