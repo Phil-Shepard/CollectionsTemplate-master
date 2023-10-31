@@ -29,54 +29,19 @@ public class WarAndPeace {
                     wordToCount.put(word, wordToCount.get(word) + 1);
         });
 
-        //Нужно собрать все встречающийся слова и посчитать для каждого из них количество раз, сколько слово встретилось
-        System.out.println("Все слова:");
-        for (String word : wordToCount.keySet())
-        {
-            System.out.println(word + " " + wordToCount.get(word));
+        List<Map.Entry<String, Integer>> wordCountList = new ArrayList<>(wordToCount.entrySet());
+        Collections.sort(wordCountList, Map.Entry.comparingByValue());
+        Collections.reverse(wordCountList);
+        System.out.println("Наиболее используемые слова:");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(wordCountList.get(i).getKey() + " " + wordCountList.get(i).getValue());
         }
         System.out.println("");
 
-        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(wordToCount.entrySet());
-
-
-        Collections.sort(entryList, (entry1, entry2) -> entry1.getValue().compareTo(entry2.getValue()));
-
-        LinkedHashMap<String, Integer> sortedHashMap = new LinkedHashMap<>();
-        for (Map.Entry<String, Integer> entry : entryList) {
-            sortedHashMap.put(entry.getKey(), entry.getValue());
-        }
-
-
-        //Топ-10 самых редких слов
-        System.out.println("Топ-10 самых редких слов");
-        int count = 0;
-        for (Map.Entry<String, Integer> entry : sortedHashMap.entrySet()) {
-            if (count < 10) {
-                System.out.println(entry.getKey() + ": " + entry.getValue());
-                count++;
-            } else {
-                break;
-            }
-        }
-        System.out.println("");
-
-        //Топ-10 самых частых слов
-        System.out.println("Топ-10 самых частых слов");
-        LinkedHashMap<String, Integer> reversedHashMap = new LinkedHashMap<>();
-        List<Map.Entry<String, Integer>> reversedList = new ArrayList<>(sortedHashMap.entrySet());
-        Collections.reverse(reversedList);
-        for (Map.Entry<String, Integer> entry : reversedList) {
-            reversedHashMap.put(entry.getKey(), entry.getValue());
-        }
-        int count1 = 0;
-        for (Map.Entry<String, Integer> entry : reversedHashMap.entrySet()) {
-            if (count1 < 10) {
-                System.out.println(entry.getKey() + ": " + entry.getValue());
-                count1++;
-            } else {
-                break;
-            }
+        Collections.reverse(wordCountList);
+        System.out.println("Наименее используемые слова:");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(wordCountList.get(i).getKey() + " " + wordCountList.get(i).getValue());
         }
     }
 }
