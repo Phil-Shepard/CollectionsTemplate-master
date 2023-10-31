@@ -19,7 +19,7 @@ public class WarAndPeace {
             "Лев_Толстой_Война_и_мир_Том_1,_2,_3,_4_(UTF-8).txt");
 
     public static void main(String[] args) {
-        HashMap<String, Integer> wordToCount = new HashMap<>();
+        HashMap<String, Integer> wordToCount = new LinkedHashMap<>();
         new WordParser(WAR_AND_PEACE_FILE_PATH)
                 .forEachWord(word -> {
                     if (!wordToCount.containsKey(word))
